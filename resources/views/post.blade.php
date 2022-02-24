@@ -5,8 +5,7 @@
 @section('content')
   <h1 class="mb-5">Halaman Post</h1>
   <article>
-    <h2>{{ $post['title'] }}</h2>
-    <p>Author : {{ $post['author'] }}</p>
-    <p>{{ $post['body'] }}</p>
+    <h2>{{ $post->title }}</h2>
+    <p>{!! $post->body !!}</p>
   </article>
 @endsection

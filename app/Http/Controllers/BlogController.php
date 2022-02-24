@@ -13,11 +13,11 @@ class BlogController extends Controller {
     }
 
     // $slug dikirim dari route
-    public function show(string $slug) {
-
+    // kemudian karena menggunakan route model binding maka di function 'show' ini dengan parameter Post $post akan otomatis mencari data berdasarkan slug, jadi proses modelnya sudah di jalankan di parameternya
+    public function show(Post $post) {
         return view('post', [
             'title' => 'post',
-            'post'  => Post::find($slug),
+            'post'  => $post,
         ]);
     }
 }

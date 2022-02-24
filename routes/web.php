@@ -26,4 +26,4 @@ Route::get('/about', function () {
 });
 Route::get('/blog', [BlogController::class, 'index']);
 
-Route::get('/blog/{slug}', [BlogController::class, 'show']);
+Route::get('/blog/{post:slug}', [BlogController::class, 'show']);
