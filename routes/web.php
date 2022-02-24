@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,48 +24,6 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('about', ['title' => 'about']);
 });
-Route::get('/blog', function () {
-    $posts = [
-        [
-            'title'  => 'Post Pertama',
-            'slug'   => 'post-pertama',
-            'author' => 'Febrianto',
-            'body'   => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni tempora, nesciunt quia libero incidunt, culpa, doloribus ex pariatur amet earum veniam quae voluptates praesentium minus reiciendis dolores dolorem accusantium. Hic.',
-        ],
-        [
-            'title'  => 'Post Kedua',
-            'slug'   => 'post-kedua',
-            'author' => 'Rizki Andi',
-            'body'   => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni tempora, nesciunt quia libero incidunt, culpa, doloribus ex pariatur amet earum veniam quae voluptates praesentium minus reiciendis dolores dolorem accusantium. Hic.',
-        ],
+Route::get('/blog', [BlogController::class, 'index']);
 
-    ];
-
-    return view('blog', ['title' => 'blog', 'posts' => $posts]);
-});
-
-Route::get('/blog/{slug}', function ($slug) {
-    $posts = [
-        [
-            'title'  => 'Post Pertama',
-            'slug'   => 'post-pertama',
-            'author' => 'Febrianto',
-            'body'   => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni tempora, nesciunt quia libero incidunt, culpa, doloribus ex pariatur amet earum veniam quae voluptates praesentium minus reiciendis dolores dolorem accusantium. Hic.',
-        ],
-        [
-            'title'  => 'Post Kedua',
-            'slug'   => 'post-kedua',
-            'author' => 'Rizki Andi',
-            'body'   => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni tempora, nesciunt quia libero incidunt, culpa, doloribus ex pariatur amet earum veniam quae voluptates praesentium minus reiciendis dolores dolorem accusantium. Hic.',
-        ],
-
-    ];
-
-    $postBySlug = [];
-    foreach ($posts as $index => $post) {
-        if ($slug === $post['slug']) {
-            $postBySlug = $post;
-        }
-    }
-    return view('post', ['title' => $slug, 'post' => $postBySlug]);
-});
+Route::get('/blog/{slug}', [BlogController::class, 'show']);
