@@ -13,6 +13,7 @@ return new class extends Migration {
     public function up() {
         Schema::create('posts', function (Blueprint $table) {
             $table->id(); // otomatis primary key & auto_increment
+            $table->foreignId('category_id');
             $table->string('title'); // varchar(255)
             $table->string('slug')->unique();
             $table->text('excerpt'); // excerpt = kutipan (tulisan sebelum tombol read more)

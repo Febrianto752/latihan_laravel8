@@ -16,8 +16,9 @@ class BlogController extends Controller {
     // kemudian karena menggunakan route model binding maka di function 'show' ini dengan parameter Post $post akan otomatis mencari data berdasarkan slug, jadi proses modelnya sudah di jalankan di parameternya
     public function show(Post $post) {
         return view('post', [
-            'title' => 'post',
-            'post'  => $post,
+            'title'    => 'post',
+            'category' => $post->category,
+            'post'     => $post,
         ]);
     }
 }
