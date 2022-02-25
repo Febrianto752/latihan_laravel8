@@ -14,12 +14,13 @@ class DatabaseSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        // \App\Models\User::factory(10)->create();
-        User::create([
-            'name'     => 'febrianto',
-            'email'    => 'febrianto@gmail.com',
-            'password' => bcrypt('febri123'),
-        ]);
+        User::factory(3)->create();
+
+        // User::create([
+        //     'name'     => 'febrianto',
+        //     'email'    => 'febrianto@gmail.com',
+        //     'password' => bcrypt('febri123'),
+        // ]);
 
         Category::create([
             'name' => 'Web Programming',
@@ -31,31 +32,38 @@ class DatabaseSeeder extends Seeder {
             'slug' => 'personal',
         ]);
 
-        Post::create([
-            'title'       => 'judul pertama',
-            'slug'        => 'judul-pertama',
-            'excerpt'     => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod. tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,',
-            'body'        => '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod. tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo. consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse. cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non<p></p><p>proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
-            'category_id' => 1,
-            'user_id'     => 1,
+        Category::create([
+            'name' => 'Android Programming',
+            'slug' => 'android-programming',
         ]);
 
-        Post::create([
-            'title'       => 'judul kedua',
-            'slug'        => 'judul-kedua',
-            'excerpt'     => 'Lorem kedua ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod. tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,',
-            'body'        => '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod. tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo. consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse. cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non<p></p><p>proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
-            'category_id' => 1,
-            'user_id'     => 1,
-        ]);
+        Post::factory(20)->create();
 
-        Post::create([
-            'title'       => 'judul ketiga',
-            'slug'        => 'judul-ketiga',
-            'excerpt'     => 'Lorem ketiga ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod. tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,',
-            'body'        => '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod. tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo. consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse. cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non<p></p><p>proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
-            'category_id' => 2,
-            'user_id'     => 1,
-        ]);
+        // Post::create([
+        //     'title'       => 'judul pertama',
+        //     'slug'        => 'judul-pertama',
+        //     'excerpt'     => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod. tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,',
+        //     'body'        => '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod. tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo. consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse. cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non<p></p><p>proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
+        //     'category_id' => 1,
+        //     'user_id'     => 1,
+        // ]);
+
+        // Post::create([
+        //     'title'       => 'judul kedua',
+        //     'slug'        => 'judul-kedua',
+        //     'excerpt'     => 'Lorem kedua ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod. tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,',
+        //     'body'        => '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod. tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo. consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse. cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non<p></p><p>proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
+        //     'category_id' => 1,
+        //     'user_id'     => 1,
+        // ]);
+
+        // Post::create([
+        //     'title'       => 'judul ketiga',
+        //     'slug'        => 'judul-ketiga',
+        //     'excerpt'     => 'Lorem ketiga ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod. tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,',
+        //     'body'        => '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod. tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo. consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse. cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non<p></p><p>proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
+        //     'category_id' => 2,
+        //     'user_id'     => 1,
+        // ]);
     }
 }
