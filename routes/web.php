@@ -25,10 +25,13 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('about', ['title' => 'about']);
 });
+
+// Route Blog
 Route::get('/blog', [BlogController::class, 'index']);
 
 Route::get('/blog/{post:slug}', [BlogController::class, 'show']);
 
+// Route Categories
 Route::get('/categories', function () {
     return view('categories', ['title' => 'List Post Category', 'categories' => Category::all()]);
 });
