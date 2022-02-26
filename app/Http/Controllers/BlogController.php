@@ -7,9 +7,9 @@ use App\Models\Post;
 class BlogController extends Controller {
     public function index() {
         return view('blog', [
-            'title' => 'blog',
+            'title' => 'Post List',
             // 'posts' => Post::all(),
-            'posts' => Post::latest()->get(),
+            'posts' => Post::with(['author', 'category'])->latest()->get(),
         ]);
     }
 

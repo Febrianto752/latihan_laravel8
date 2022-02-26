@@ -5,7 +5,7 @@
 
 
 @section('content')
-  <h1 class="mb-5">Daftar Post</h1>
+  <h1 class="mb-5">{{ $title }}</h1>
   
   @foreach ($posts as $index=>$post)
     <article class="border-bottom border-dark mb-5">
