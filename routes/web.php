@@ -21,10 +21,10 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', function () {
-    return view('home', ['title' => 'home', 'application' => 'Blog Post']);
+    return view('home', ['nav_link' => 'home', 'title' => 'home', 'application' => 'Blog Post']);
 });
 Route::get('/about', function () {
-    return view('about', ['title' => 'about']);
+    return view('about', ['nav_link' => 'about', 'title' => 'about']);
 });
 
 // Route Blog
@@ -34,11 +34,11 @@ Route::get('/blog/{post:slug}', [BlogController::class, 'show']);
 
 // Route Categories
 Route::get('/categories', function () {
-    return view('categories', ['title' => 'List Post Category', 'categories' => Category::all()]);
+    return view('categories', ['nav_link' => 'categories', 'title' => 'List Post Category', 'categories' => Category::all()]);
 });
 
 Route::get('/categories/{category:slug}', function (Category $category) {
-    return view('category', ['title' => $category->name, 'posts' => $category->posts->load('author', 'category'), 'category' => $category]);
+    return view('blog', ['title' => "Post By Category - {$category->name}", 'posts' => $category->posts->load('author', 'category'), 'category' => $category]);
 });
 
 Route::get('/authors/{author:username}', function (User $author) {
