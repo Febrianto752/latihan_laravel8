@@ -8,11 +8,14 @@
     <!-- Bootstrap CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 
+    {{-- Bootstrap Icon --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
     <title>@yield('title')</title>
   </head>
   <body>
     {{-- Navbar  --}}
-    @include('layouts/partials/navbar');
+    @include('layouts/partials/navbar')
     {{-- End navbar --}}
 
     <div class="container">

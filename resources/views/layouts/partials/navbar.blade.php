@@ -24,7 +24,12 @@ if (!isset($nav_link)) {
         <li class="nav-item">
           <a class="nav-link {{ ($nav_link === 'categories')? 'active':'' }}" href="/categories">Categories</a>
         </li>
+      </ul>
 
+      <ul class="ms-auto navbar-nav">
+        <li class="nav-item">
+          <a href="/login" class="nav-link {{ ($nav_link === 'login')? 'active':'' }}"><i class="bi bi-box-arrow-in-right"></i>Login</a>
+        </li>
       </ul>
     </div>
   </div>
