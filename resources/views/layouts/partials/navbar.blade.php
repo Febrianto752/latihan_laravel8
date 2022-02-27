@@ -19,7 +19,7 @@ if (!isset($nav_link)) {
           <a class="nav-link  {{ ($nav_link === 'about')? 'active':'' }}" href="/about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  {{ ($nav_link === 'blog')? 'active':'' }}" href="/blog">Blog</a>
+          <a class="nav-link  {{ ($nav_link === 'blog')? 'active':'' }}" href="/posts">Blog</a>
         </li>
         <li class="nav-item">
           <a class="nav-link {{ ($nav_link === 'categories')? 'active':'' }}" href="/categories">Categories</a>

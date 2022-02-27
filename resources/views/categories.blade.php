@@ -8,7 +8,7 @@
   <div class="row">
     @foreach ($categories as $index => $category)
     <div class="col">
-      <a href="/categories/{{ $category->slug }}">
+      <a href="/posts?category={{ $category->slug }}">
         <div class="card bg-dark text-white">
           <img src="https://source.unsplash.com/random/500x500?{{ $category->name }}" class="card-img" alt="{{ $category->name }}">
           <div class="card-img-overlay border border-primary d-flex align-items-center p-0">
@@ -19,11 +19,5 @@
     </div>
     @endforeach
   </div>
-  <ul class="list-group">
- 
-  
-    <li class="list-group-item" aria-current="true"><a href="/categories/{{ $category->slug }}">{{ $category->name }}</a></li>
 
-  
-  </ul>
 @endsection
