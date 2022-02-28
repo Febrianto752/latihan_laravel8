@@ -26,14 +26,9 @@ class RegisterController extends Controller {
         // $validatedData['password'] = bcrypt($validatedData['password']);
         $validatedData['password'] = Hash::make($validatedData['password']);
 
-        if (User::create($validatedData)) {
-            echo "
-                <script>
-                    alert('data has been saved!');
-                </script>
-            ";
-        }
+        User::create($validatedData);
+
         // $request->session()->flash('success', 'New user has been created');
-        return redirect('/login')->with('success', 'New user has been created');
+        return redirect('/login')->with('success', 'New user has been created, Please Login');
     }
 }

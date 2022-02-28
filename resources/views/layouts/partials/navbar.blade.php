@@ -26,11 +26,34 @@ if (!isset($nav_link)) {
         </li>
       </ul>
 
+      @auth
+      <ul class="ms-auto navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Welcome {{ auth()->user()->name }}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#"><i class="bi bi-house-door-fill"></i> My Dashboard</a></li>
+            <li><a class="dropdown-item" href="#"><i class="bi bi-person-lines-fill"></i> My Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <form action="/logout" method="post">
+                @csrf 
+                <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Logout</button>
+              </form>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      @else
       <ul class="ms-auto navbar-nav">
         <li class="nav-item">
           <a href="/login" class="nav-link {{ ($nav_link === 'login')? 'active':'' }}"><i class="bi bi-box-arrow-in-right"></i>Login</a>
         </li>
       </ul>
+      @endauth
+
+      
     </div>
   </div>
 </nav>
