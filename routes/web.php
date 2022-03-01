@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Models\Category;
@@ -22,7 +22,6 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
 Route::get('/', function () {
     return view('home', ['nav_link' => 'home', 'title' => 'home', 'application' => 'Blog Post']);
 });
@@ -58,6 +57,11 @@ Route::get('/register', [RegisterController::class, 'index']);
 
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/dashboard', function () {
+    return view('dashboard/index', ['title' => 'dashboard']);
+})->middleware('auth');
 
-Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
+Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth');
+
+// Route Dashboard Post
+Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
