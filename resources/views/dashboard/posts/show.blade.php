@@ -11,11 +11,16 @@
         <h1 class="mb-5">Post : {{ $post->title }}</h1>
         <a href="/dashboard/posts" class="btn btn-info"><span data-feather="corner-down-left"></span> Back To All My
             Post</a>
-        <form class="d-inline-block">
+        <form action="/dashboard/posts/{{ $post->slug }}/edit" class="d-inline-block">
+            @csrf
             <button class="btn btn-warning"><span data-feather="edit"></span> edit</button>
         </form>
-        <form class="d-inline-block">
-            <button class="btn btn-danger"><span data-feather="x-circle"></span> delete</button>
+        <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="d-inline-block">
+            @csrf
+            @method('delete')
+            <button class="btn btn-danger" onclick="return confirm('Are You Sure To Delete It?')"><span
+                    data-feather="x-circle"></span>
+                delete</button>
         </form>
         <article class="fs-5 my-4">
             <img src="/images/banner-web-1.jpg" alt="$post->title" class="img-fluid mb-4">

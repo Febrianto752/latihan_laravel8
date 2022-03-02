@@ -7,41 +7,72 @@
 
 </div>
 
-<div class="table-responsive-sm">
-    <table class="table table-striped table-sm">
-        <thead>
-            <tr>
-                <th scope="col">No.</th>
-                <th scope="col">Title</th>
-                <th scope="col">Category</th>
-                <th scope="col">Created at</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($posts as $index => $post)
-            <tr>
-                <td>{{ $index+1 }}</td>
-                <td style="min-width: 180px;">{{ $post->title }}</td>
-                <td style="min-width: 100px;">{{ $post->category->name }}</td>
-                <td style="min-width: 100px;">{{ $post->created_at }}</td>
-                <td style="min-width: 210px;">
-                    <form action="/dashboard/posts/{{ $post->slug }}" class="d-inline-block">
-                        @csrf
-                        <button class="badge bg-info"><span data-feather="eye"></span> view</button>
-                    </form>
-                    <form class="d-inline-block">
-                        <button class="badge bg-warning"><span data-feather="edit"></span> edit</button>
-                    </form>
-                    <form class="d-inline-block">
-                        <button class="badge bg-danger"><span data-feather="x-circle"></span> delete</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
+<form action="/dashboard/posts/create" class="mb-3">
+    @csrf
+    <button class="btn btn-success">Create New Post</button>
+</form>
 
-
-        </tbody>
-    </table>
+@if(session()->has('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ session('success') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
+
+@elseif(session()->has('error'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ session('error') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
+<div class="row">
+    <div class="col-lg-10">
+        <div class="table-responsive-sm my-4">
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Created at</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($posts as $index => $post)
+                    <tr>
+                        <td>{{ $index+1 }}</td>
+                        <td style="min-width: 180px;">{{ $post->title }}</td>
+                        <td style="min-width: 100px;">{{ $post->category->name }}</td>
+                        <td style="min-width: 100px;">{{ $post->created_at }}</td>
+                        <td style="min-width: 210px;">
+                            <form action="/dashboard/posts/{{ $post->slug }}" class="d-inline-block">
+                                @csrf
+                                <button class="badge bg-info border-0"><span data-feather="eye"></span> view</button>
+                            </form>
+                            <form action="/dashboard/posts/{{ $post->slug }}/edit" class="d-inline-block">
+                                @csrf
+                                <button class="badge bg-warning border-0"><span data-feather="edit"></span>
+                                    edit</button>
+                            </form>
+                            <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="d-inline-block">
+                                @csrf
+                                @method('delete')
+                                <button class="badge bg-danger border-0"
+                                    onclick="return confirm('Are You Sure To Delete It?')"><span
+                                        data-feather="x-circle"></span>
+                                    delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
 @endsection
