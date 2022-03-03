@@ -36,12 +36,19 @@ class DashboardPostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
+
         $validatedData = $request->validate([
             'title'       => 'required|max:255',
             'slug'        => 'required|unique:posts',
             'category_id' => 'required',
+            // untuk validasi size file : harus di dahulu oleh file|kemudian max:2048kb = 2mb
+            'image'       => 'image|file|max:2048',
             'body'        => 'required',
         ]);
+
+        if ($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('post-images');
+        }
 
         $validatedData['user_id'] = auth()->user()->id;
         $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200, '...');

@@ -23,7 +23,11 @@
                 delete</button>
         </form>
         <article class="fs-5 my-4">
+            @if($post->image)
+            <img src="{{ asset("storage/{$post->image}") }}" alt="$post->title" class="img-fluid mb-4">
+            @else
             <img src="/images/banner-web-1.jpg" alt="$post->title" class="img-fluid mb-4">
+            @endif
             {!! $post->body !!}
         </article>
     </div>

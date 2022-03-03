@@ -44,7 +44,7 @@ $nav_link = null;
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <form action="/logout" method="post">
+                            <form action="/logout" method="get">
                                 @csrf
                                 <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i>
                                     Logout</button>
