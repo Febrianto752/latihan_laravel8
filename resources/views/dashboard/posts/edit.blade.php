@@ -9,7 +9,7 @@
 
 <div class="row">
     <div class="col-lg-8">
-        <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="mb-5">
+        <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="mb-5" enctype="multipart/form-data">
             @csrf
             @method('put')
             <div class="mb-3">
@@ -49,6 +49,25 @@
             </div>
 
             <div class="mb-3">
+                <label for="image" class="form-label">Upload Image</label>
+                <input type="hidden" name="old_image" value="{{ $post->image ?? null }}" onchange="return previewImg()">
+                @if($post->image)
+                <img src="{{ asset("storage/{$post->image}") }}" class="img-thumbnail mb-2 d-block image-preview"
+                    alt="image" width="200">
+                @else
+                <img src="{{ asset("images/no-image.png") }}" class="img-thumbnail mb-2 d-block image-preview"
+                    alt="image" width="200">
+                @endif
+                <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"
+                    onchange="previewImg()">
+                @error('image')
+                <div class="invalid-feedback">
+                    <p>{{ $message }}</p>
+                </div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
                 <label for="body" class="form-label">Body</label>
                 @error('body')
                 <p class="text-danger">{{ $message }}</p>
@@ -77,6 +96,24 @@
                 slugInputElem.value = responseJson.slug
             });
     });
+
+    function previewImg() {
+        const imageElem = document.getElementById('image'); // input elem
+
+        const imagePreview = document.getElementsByClassName('image-preview')[0]; // image elem
+
+        // objek untuk wadah penyimpanan suatu file
+        const imageFile = new FileReader();
+
+        // membaca url penyimpanan lokal file(mungkin)
+        imageFile.readAsDataURL(imageElem.files[0]);
+
+        imageFile.onload = function (e) {
+            // e.target.result berisikan banyak kode, sepertinya berisikan konversi url penyimpanan lokal file
+            imagePreview.src = e.target.result;
+
+        }
+    }
 
 </script>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -46,6 +47,7 @@ class DashboardPostController extends Controller {
             'body'        => 'required',
         ]);
 
+        // jika user upload image maka image di simpan di folder post-images
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('post-images');
         }
@@ -91,6 +93,7 @@ class DashboardPostController extends Controller {
         $rules = [
             'title'       => 'required|max:255',
             'category_id' => 'required',
+            'image'       => 'image|file|max:2048',
             'body'        => 'required',
         ];
 
@@ -99,6 +102,13 @@ class DashboardPostController extends Controller {
         }
 
         $validatedData = $request->validate($rules);
+
+        if ($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('post-images');
+            Storage::delete($request->old_image);
+        } else {
+            $validatedData['image'] = $request->old_image;
+        }
 
         $validatedData['user_id'] = auth()->user()->id;
         $validatedData['excerpt'] = Str::limit(strip_tags($request->body), '200', '...');
@@ -116,6 +126,9 @@ class DashboardPostController extends Controller {
      */
     public function destroy(Post $post) {
         if (Post::destroy($post->id)) {
+            if ($post->image) {
+                Storage::delete($post->image);
+            }
             return redirect('/dashboard/posts')->with('success', 'Post has been deleted1');
         }
         return redirect('/dashboard/posts')->with('error', 'Something Error, Please contact admin!');

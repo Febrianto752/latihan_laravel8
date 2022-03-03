@@ -49,7 +49,10 @@
 
             <div class="mb-3">
                 <label for="image" class="form-label">Upload Image</label>
-                <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image">
+                <img src="{{ asset("images/no-image.png") }}" class="img-thumbnail mb-2 d-block image-preview"
+                    alt="image" width="200">
+                <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"
+                    onchange="previewImg()">
                 @error('image')
                 <div class="invalid-feedback">
                     <p>{{ $message }}</p>
@@ -86,6 +89,28 @@
                 slugInputElem.value = responseJson.slug
             });
     });
+
+    function previewImg() {
+        const imageElem = document.getElementById('image'); // input elem
+        //   const sampulLabel = document.getElementsByClassName('custom-file-label')[0];
+        const imagePreview = document.getElementsByClassName('image-preview')[0]; // image elem
+
+        // mengisikan content pada label sampul dengan nama file yg baru d upload
+        //   sampulLabel.textContent = sampul.files[0].name;
+        // sampul.files[0] berisikan objek mengenai file yang di upload
+
+        // objek untuk wadah penyimpanan suatu file
+        const imageFile = new FileReader();
+
+        // membaca url penyimpanan lokal file(mungkin)
+        imageFile.readAsDataURL(imageElem.files[0]);
+
+        imageFile.onload = function (e) {
+            // e.target.result berisikan banyak kode, sepertinya berisikan konversi url penyimpanan lokal file
+            imagePreview.src = e.target.result;
+
+        }
+    }
 
 </script>
 

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CobaController;
 use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -67,3 +69,11 @@ Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth');
 Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
 
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
+
+Route::get('/coba-file-input', function () {
+    return view('coba-file-input');
+});
+
+Route::post('/kirim-file', [CobaController::class, 'index']);
+
+Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('admin');
